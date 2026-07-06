@@ -358,8 +358,9 @@ app.layout = html.Div(
         html.H2("Mapa interactivo de Panamá"),
 
 html.P(
-    "Mapa interactivo de prueba. Posteriormente se integrará con límites "
-    "distritales de Panamá y una variable sociodemográfica del INEC."
+    "Mapa interactivo de Panamá a nivel distrital. Los colores representan "
+    "la población estimada por distrito y se incluye una gráfica resumen "
+    "con los distritos de mayor valor."
 ),
 
 dcc.Graph(id="mapa-panama"),
@@ -448,23 +449,24 @@ def actualizar_mapa(_):
     fig_mapa = px.choropleth_mapbox(
         gdf_mapa,
         geojson=geojson_distritos,
-        locations=gdf_mapa["shapeID"],
+        locations="shapeID",
         featureidkey="properties.shapeID",
         color="poblacion_estimada",
-        hover_name="distrito",
+        hover_name="shapeName",
         hover_data={
             "poblacion_estimada": True,
             "indice_sociodemografico": True,
         },
         mapbox_style="carto-positron",
         center={"lat": 8.5, "lon": -80.0},
-        zoom=6,
-        opacity=0.65,
+        zoom=6.2,
+        opacity=0.85,
         title="Mapa interactivo de distritos de Panamá según población estimada",
+        color_continuous_scale="Viridis",
         labels={
             "poblacion_estimada": "Población estimada",
             "indice_sociodemografico": "Índice sociodemográfico",
-        },
+        }, 
     )
 
     fig_mapa.update_layout(
