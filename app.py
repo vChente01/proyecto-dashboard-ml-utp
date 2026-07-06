@@ -37,7 +37,7 @@ numeric_cols = df.select_dtypes(include="number").columns.tolist()
 # Datos reales para mapa de Panamá
 # =========================
 
-gdf_distritos = gpd.read_file("mapa_panama/panama_distritos.geojson")
+gdf_distritos = gpd.read_file("mapa_panama/panama_distritos_simplificado.geojson")
 datos_distritos = pd.read_csv("mapa_panama/datos_distritos.csv")
 
 # Limpiar nombres para evitar problemas por espacios o codificación
