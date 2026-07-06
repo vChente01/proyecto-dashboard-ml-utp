@@ -1,0 +1,22 @@
+Usage of the geoBoundaries Database requires citation.:
+This can be satisfied by either:
+   1. (Preferred) - Citing our academic work: Runfola, D. et al. (2020)
+      geoBoundaries: A global database of political administrative boundaries.
+      PLoS ONE 15(4): e0231866. https://doi.org/10.1371/journal.pone.0231866
+   2. Providing a link to geoboundaries.org - i.e., 'Administrative boundaries courtesy 
+      of geoBoundaries.org'
+Additionally, we recommend citation of the source(s) noted in this metadata file.
+
+
+ISO-3166-1 (Alpha-3): PAN
+Boundary Representative of Year: 2012
+Boundary Type: ADM2
+Boundary Source(s): Milton Solano, of the Smithsonian Tropical Research Institute, on ArcGIS online, GIS Laboratory. Smithsonian Tropical Research Institute, Panama, 2012
+Canonical Boundary Type Name: 
+License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+License Notes: need to update
+License Source: https//www.arcgis.com/home/item.html?id=8f1c5499d3a8423888454cfee5b45586
+Data Source: https//www.arcgis.com/home/item.html?id=8f1c5499d3a8423888454cfee5b45586
+Source Data Updated On: Thu Jan 19 07:31:04 2023
+File Built On: Dec 12, 2023
+Number of Administrative Units: 76
