@@ -40,13 +40,21 @@ numeric_cols = df.select_dtypes(include="number").columns.tolist()
 gdf_distritos = gpd.read_file("mapa_panama/panama_distritos.geojson")
 datos_distritos = pd.read_csv("mapa_panama/datos_distritos.csv")
 
-# Unir el GeoJSON con el CSV usando el nombre del distrito
+# Limpiar nombres para evitar problemas por espacios o codificación
+gdf_distritos["shapeName_clean"] = gdf_distritos["shapeName"].astype(str).str.strip()
+datos_distritos["distrito_clean"] = datos_distritos["distrito"].astype(str).str.strip()
+
+# Unir el GeoJSON con el CSV usando el nombre limpio del distrito
 gdf_mapa = gdf_distritos.merge(
     datos_distritos,
-    left_on="shapeName",
-    right_on="distrito",
+    left_on="shapeName_clean",
+    right_on="distrito_clean",
     how="left"
 )
+
+# Si algún distrito no logra unirse, se rellena con 0 para que el mapa no quede sin colores
+gdf_mapa["poblacion_estimada"] = gdf_mapa["poblacion_estimada"].fillna(0)
+gdf_mapa["indice_sociodemografico"] = gdf_mapa["indice_sociodemografico"].fillna(0)
 
 # Convertir a GeoJSON para Plotly
 geojson_distritos = json.loads(gdf_mapa.to_json())
@@ -440,7 +448,8 @@ def actualizar_mapa(_):
     fig_mapa = px.choropleth_mapbox(
         gdf_mapa,
         geojson=geojson_distritos,
-        locations=gdf_mapa.index,
+        locations=gdf_mapa["shapeID"],
+        featureidkey="properties.shapeID",
         color="poblacion_estimada",
         hover_name="distrito",
         hover_data={
